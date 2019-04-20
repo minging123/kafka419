@@ -15,7 +15,7 @@ public class CustomerConsumer {
 
         Properties props = new Properties();
         //kafka集群
-        props.put("bootstrap.servers", "192.168.8.123:9092");
+        props.put("bootstrap.servers", "192.168.8.120:9092");
         //消费者组id
         props.put("group.id", "test1");
         //换组重复消费topic
