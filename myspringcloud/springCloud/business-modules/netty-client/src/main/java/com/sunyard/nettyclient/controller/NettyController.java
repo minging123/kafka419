@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/")
 @Api(tags = "netty-server")
-public class BaiRongController {
+public class NettyController {
     @Value("${bairong.strategy_id_package}")
     private String strategyIdPackage;
     @Value("${bairong.strategy_id_money}")
