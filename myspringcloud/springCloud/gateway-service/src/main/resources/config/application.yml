@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: local
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+      enabled: true
+  application:
+    name: gateway-center
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+           enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000 #设置超时时间 10秒
+
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 40000
+

@@ -1,0 +1,69 @@
+server:
+  port: 8040
+
+gateway:
+  host: localhost
+  port: 18023
+
+swagger:
+  enable: true
+  title: 百融接口文档
+  description:
+  serviceUrl: http://localhost:8080/
+  version: 1.0.0
+  controllers: com.sunyard.bairong.controller
+
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//10.17.2.116:1521/ORCL
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: netloan
+    password: nl123
+    type: com.alibaba.druid.pool.DruidDataSource
+eureka:
+  instance:
+    hostname: ${spring.cloud.client.ip-address}
+    prefer-ip-address: true
+    status-page-url: /actuator/info
+    health-check-url: /actuator/health
+    metadata-map:
+      zone: dev
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    region: mingli
+    availability-zones:
+      mingli: dev
+    service-url:
+      dev: http://192.168.43.156:18021/eureka/,http://192.168.131.128:8080/eureka/
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:18022/uaa/oauth/user
+      prefer-token-info: false
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  config:
+    default:
+      connectTimeout: 50000
+      readTimeout: 30000
+      loggerLevel: basic
+
+bairong:
+  apiCode: 3003724
+#  apiName1: verificationApi
+  apiName1: SandboxverApi
+  apiName2: strategyApi
+  bairongusername: jsyhStr
+  bairongpassword: jsyhStr
+  conf_id_package: DTV0000001
+  strategy_id_package: STR0025269
+#  strategy_id_page: STR0025709
+  strategy_id_money: STR0025711
+

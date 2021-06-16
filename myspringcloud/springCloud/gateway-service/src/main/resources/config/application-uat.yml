@@ -1,0 +1,82 @@
+server:
+  port: 8023
+  use-forward-headers: true
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8021}/eureka/
+
+zuul:
+  ignored-services: '*'
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  sensitiveHeaders:
+
+  routes:
+    auth-service:
+      path: /uaa/**
+      sensitiveHeaders: "*"
+      serviceId: auth-service
+    sys-service:
+      path: /sys/**
+      serviceId: sys-service
+    rule-service:
+      path: /rule/**
+      serviceId: rule-service
+    station-service:
+      path: /station/**
+      serviceId: station-service
+    fintech-service:
+      path: /fin/**
+      serviceId: fintech-service
+    eod-service:
+      path: /eod/**
+      serviceId: eod-service
+    foreign-service:
+      path: /foreign/**
+      serviceId: foreign-service
+    file-service:
+      path: /file/**
+      serviceId: file-service
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:${server.port}/uaa/oauth/token
+      user-authorization-uri: http://localhost:${server.port}/uaa/oauth/authorize
+      authentication-scheme: header
+    resource:
+      user-info-uri: http://localhost:${server.port}/uaa/oauth/user
+      prefer-token-info: false
+      
+management:
+  security:
+    #关闭安全验证
+    enabled: false
+#按钮级权限开关
+filterStart:
+  status: false
+
+esb:
+  proxy:
+    external-port: 35835
+    internal-port: 25051
+    esb-host: 192.168.16.200
+    esb-port: 5800
+    retry-times: 3
+    retry-wait: 5
+    connect-timeout: 1000
+  data:
+    date-format: yyyy-MM-dd
+    time-format: HHmmss
+    sub-system: AAS
+    channel: 12
+    content-max-length: 100000
+    data-header-length: 8
+    external-encoding: GBK
+    internal-encoding: UTF-8
