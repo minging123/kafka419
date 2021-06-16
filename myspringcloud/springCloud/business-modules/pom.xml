@@ -12,5 +12,6 @@
     <modules>
         <module>netty-client</module>
         <module>netty-server</module>
+        <module>springboot-netty-protobuf</module>
     </modules>
 </project>
