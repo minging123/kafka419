@@ -1,0 +1,26 @@
+server:
+  port: 18020
+
+eureka:
+  instance:
+    #设置为false,表示使用domain+port方式注册
+    prefer-ip-address: true
+    hostname: ${spring.cloud.client.ip-address}
+    #非本地环境注释此项
+    #ip-address: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    #注册中心之间互相注册
+    serviceUrl:
+       defaultZone: http://192.168.43.156:18021/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    #设为false，关闭自我保护
+    enable-self-preservation: false
+    #清理间隔（单位毫秒，默认是60*1000）
+    eviction-interval-timer-in-ms: 3000
+spring:
+  cloud:
+    inetutils:
+      use-only-site-local-interfaces: true
